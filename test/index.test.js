@@ -10,7 +10,7 @@ describe('Readme Summarizer', () => {
         let readme = testResources.readme;
 
         it('should summarize readme to a long description from text', () => {
-            let description = ReadmeSummarizer.fromMarkdownText(readme);
+            let description = ReadmeSummarizer.fromMarkdownText(readme, false);
             assert.equal(description, expectedLongDescription);
         });
 
@@ -23,20 +23,14 @@ describe('Readme Summarizer', () => {
     describe('From URL', () => {
         let url = testResources.readmeUrl;
 
-        it('should summarize readme to a long description from url', () => {
-            ReadmeSummarizer.fromUrl(url).then((result) => {
-                assert.equal(result, expectedLongDescription);
-            }).catch(() => {
-                assert.fail();
-            });
+        it('should summarize readme to a long description from url', async () => {
+            const result = await ReadmeSummarizer.fromUrl(url, false);
+            assert.equal(result, expectedLongDescription);
         });
 
-        it('should summarize readme to a short description from url', () => {
-            ReadmeSummarizer.fromUrl(url, true).then((result) => {
-                assert.equal(result, expectedShortDescription);
-            }).catch(() => {
-                assert.fail();
-            });
+        it('should summarize readme to a short description from url', async () => {
+            const result = await ReadmeSummarizer.fromUrl(url, true);
+            assert.equal(result, expectedShortDescription);
         });
     });
 });
