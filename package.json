@@ -4,8 +4,11 @@
   "description": "Summaries Readme.md files into few sentences.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && mocha --recursive || true",
+    "test": "npm run lint && mocha --recursive",
     "lint": "jshint --exclude-path=.gitignore ."
+  },
+  "browser": {
+    "./dynamic/node-fetch.js": "./dynamic/browser-fetch.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +29,9 @@
     "chai": "^4.2.0",
     "jshint": "^2.9.6",
     "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "is-md": "^2.0.0",
+    "node-fetch": "^2.3.0"
   }
 }
