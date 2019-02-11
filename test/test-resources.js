@@ -1,4 +1,5 @@
 const readmeUrl = 'https://raw.githubusercontent.com/bennymeg/IsraelPostalServiceAPI/master/README.md';
+const readmeUrlTest ='https://raw.githubusercontent.com/bennymeg/ReadmeSummarizer/master/README.md';
 
 const expectedShortDescription = "An API for Israel postal service - query shipment price easily.";
 
