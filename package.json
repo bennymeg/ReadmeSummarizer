@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && mocha --recursive",
-    "lint": "jshint --exclude-path=.gitignore ."
+    "lint": "jshint --exclude-path=.gitignore .",
+    "api": "jsdoc2md index.js > ./docs/API.md"
   },
   "browser": {
     "./dynamic/node-fetch.js": "./dynamic/browser-fetch.js"
