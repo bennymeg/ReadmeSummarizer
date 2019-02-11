@@ -11,24 +11,26 @@ class ReadmeSummarizer {
     /**
      * Summarize markdown readme file from a given URL
      * @param {string} url readme file URL.
-     * @param {boolean} short get short summary (default: false).
+     * @param {boolean} short get short summary (default: true).
      * @returns {Promise<string>} a promise to receive the readme summary.
      */
-    static fromUrl(url, short=false) {
-        return fetchReadmeFile(url).then(response => response.text()).then(response => {
-            return this.fromMarkdownText(response, short);
-        }).catch(error => console.log(error));
+    static fromUrl(url, short=true) {
+        return fetchReadmeFile(url)
+            .then(response => response.text())
+            .then(response => {
+                return this.fromMarkdownText(response, short);
+            }).catch(error => console.log(error));
     }
 
     /**
      * Summarize markdown readme file from a given text string
      * @param {string} text readme file as string.
-     * @param {boolean} short get short summary (default: false).
+     * @param {boolean} short get short summary (default: true).
      * @returns {Promise<string>} a promise to receive the readme summary.
      */
-    static fromMarkdownText(text, short=false) {
+    static fromMarkdownText(text, short=true) {
         // remove badges and comments
-        let cleanReadme = removeEmptyLines(removeComments(removeBadges(String(text))));
+        let cleanReadme = removeComments(removeBadges(String(text)));
 
         // convert titles to sections
         cleanReadme = sectionizeMarkdown(cleanReadme);
@@ -41,9 +43,14 @@ class ReadmeSummarizer {
 
         // remove markdown from the description
         let longDescription = removeMarkdown(cleanReadme);
-        let shortDescription = longDescription.replace(/(^.+[\n\.]).*$/, '$1');
 
-        return (short ? shortDescription : longDescription).trim('\n').trim('\r');
+        // get the first line
+        let shortDescriptionMatch = longDescription.match(new RegExp('^(.+)(\n|\.\s+).*$', 'm'));
+        let shortDescription = shortDescriptionMatch ? shortDescriptionMatch[1] : longDescription;
+        // let shortDescriptionMatch = longDescription.replace(/[\n]+/g, '. ').split(/\.\s/);
+        // let shortDescription = shortDescriptionMatch[0];
+
+        return removeEmptyLines(short ? shortDescription : longDescription);
     }
 }
 
@@ -60,22 +67,27 @@ function fetchReadmeFile(url) {
 }
 
 function removeBadges(text) {
-    return text.replace(/\[.*\]\(.*\)/gm, ''); 
+    // remove all badges which ar not part of a sentence
+    return text.replace(/^\s*\[!.*\]\(.*\)/gm, ''); 
 }
 
 function removeComments(text) {
+    // remove comments from the text
     return text.replace(/<!--.*-->/gm, ''); 
 }
 
 function removeEmptyLines(text) {
-    return text.replace(/^\s*[\r\n]/gm, ''); 
+    // remove all the empty lines from the text
+    return text.replace(/^\s*[\r\n]/gm, '').trim('\n').trim('\r'); 
 }
 
 function removeMarkdown(text) {
-    return text.replace(/(?:__|[*#])|\[(.*?)\]\(.*?\)/gm, '$1'); 
+    // strip the text from markdown symbols, convert link and inline badges to text
+    return text.replace(/(?:__|[*#`])|\[!\[(.*?)\]\(.*?\)\]\(.*?\)|\[(.*?)\]\(.*?\)/gm, '$1'); 
 }
 
 function sectionizeMarkdown(text) {
+    // convert all the titles and subtitles to known section title
     return text.replace(/^#+.*$/gm, SECTION); 
 }
 
