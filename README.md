@@ -42,7 +42,7 @@ ReadmeSummarizer.fromText(readmeUrl, shortSummery);
 ## Documentation ##  
 - 👨🏼‍💻 [API](https://github.com/bennymeg/ReadmeSummarizer/blob/master/docs/API.md),  
 - 👩🏼‍🏫 [Examples](https://github.com/bennymeg/ReadmeSummarizer/blob/master/docs/examples),  
-- 📜 [Change log](https://github.com/bennymeg/ReadmeSummarizer/blob/master/docs/CHANGELOG.md),  
+<!-- - 📜 [Change log](https://github.com/bennymeg/ReadmeSummarizer/blob/master/docs/CHANGELOG.md),   -->
 - 🖋  [Licence](https://github.com/bennymeg/ReadmeSummarizer/blob/master/LICENSE)
 
 ## Support ##
