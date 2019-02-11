@@ -1,2 +1,2 @@
-# readme-summery
-summeries readme file into few sentences
+# Readme Summarizer
+Summaries Readme.md files into few sentences.
