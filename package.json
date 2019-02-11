@@ -1,6 +1,6 @@
 {
   "name": "readme-summarizer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Summaries Readme.md files into few sentences.",
   "main": "index.js",
   "scripts": {
@@ -36,7 +36,6 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
-    "is-md": "^2.0.0",
     "node-fetch": "^2.3.0"
   }
 }

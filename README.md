@@ -1,5 +1,5 @@
 # Readme Summarizer
-Summaries markdown readme files into few sentences.
+Summaries markdown readme files into few sentences. Get short description for any repository easily.
 
 [![licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/bennymeg/ReadmeSummarizer/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/readme-summarizer.svg)](https://www.npmjs.com/package/readme-summarizer)
@@ -23,7 +23,8 @@ let shortSummery = true;
 
 // get readme summery asynchronously from URL
 ReadmeSummarizer.fromUrl(readmeUrl, shortSummery).then((response) => {
-    console.log(response); 
+    console.log(response);
+    // prints: "Summaries markdown readme files into few sentences."
 }).catch((error) => {
     console.error('Error:', error);
 });
