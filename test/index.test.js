@@ -1,5 +1,5 @@
 const ReadmeSummarizer = require('../index').ReadmeSummarizer;
-const testResources = require('./resources');
+const testResources = require('./test-resources');
 const assert = require('chai').assert;
 
 describe('Readme Summarizer', () => {
