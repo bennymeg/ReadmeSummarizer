@@ -16,13 +16,13 @@ npm install --save readme-summarizer
 import { ReadmeSummarizer } from 'readme-summarizer';
 ```
 
-### Get readme summery from URL:
+### Get readme summary from URL:
 ```javascript
 let readmeUrl = "https://raw.githubusercontent.com/bennymeg/ReadmeSummarizer/master/README.md";
-let shortSummery = true;
+let shortSummary = true;
 
-// get readme summery asynchronously from URL
-ReadmeSummarizer.fromUrl(readmeUrl, shortSummery).then((response) => {
+// get readme summary asynchronously from URL
+ReadmeSummarizer.fromUrl(readmeUrl, shortSummary).then((response) => {
     console.log(response);
     // prints: "Summaries markdown readme files into few sentences."
 }).catch((error) => {
@@ -30,14 +30,14 @@ ReadmeSummarizer.fromUrl(readmeUrl, shortSummery).then((response) => {
 });
 ```
 
-### Get readme summery from text:
+### Get readme summary from text:
 
 ```javascript
 let readmeAsText = "#Your markdown readme text string...";
-let shortSummery = false;
+let shortSummary = false;
 
-// get readme summery from text string
-ReadmeSummarizer.fromText(readmeUrl, shortSummery);
+// get readme summary from text string
+ReadmeSummarizer.fromText(readmeUrl, shortSummary);
 ```
 
 ## Documentation ##  

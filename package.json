@@ -1,6 +1,6 @@
 {
   "name": "readme-summarizer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Summaries Readme.md files into few sentences.",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "readme",
     "summarizer",
     "git",
-    "summery",
+    "summary",
     "repository",
     "description",
     "markdown"
