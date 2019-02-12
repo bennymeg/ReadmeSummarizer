@@ -42,7 +42,7 @@ class ReadmeSummarizer {
         cleanReadme = cleanReadme.replace(new RegExp(`^${SECTION}(.+?)${SECTION}.*$`, 'gsm'), '$1').trim();
 
         // remove markdown from the description
-        let longDescription = removeEmptyLines(removeMarkdown(cleanReadme));
+        let longDescription = removeEmptyLines(removeMarkdown(removeTables(cleanReadme)));
 
         // get the first line
         //let shortDescriptionMatch = longDescription.match(new RegExp('^(.+)(\n|\.\s+).*$', 'm'));
@@ -79,6 +79,11 @@ function removeComments(text) {
 function removeEmptyLines(text) {
     // remove all the empty lines from the text
     return text.replace(/^\s*[\r\n]/gm, '').trim('\n').trim('\r').trim(); 
+}
+
+function removeTables(text) {
+    // strip the text from markdown tables
+    return text.replace(/^\|?.+\|.+\|.+\|?.*$/gm, ''); 
 }
 
 function removeMarkdown(text) {
