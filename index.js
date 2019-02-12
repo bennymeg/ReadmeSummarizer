@@ -42,7 +42,7 @@ class ReadmeSummarizer {
         cleanReadme = cleanReadme.replace(new RegExp(`^${SECTION}(.+?)${SECTION}.*$`, 'gsm'), '$1').trim();
 
         // remove markdown from the description
-        let longDescription = removeMarkdown(cleanReadme);
+        let longDescription = removeEmptyLines(removeMarkdown(cleanReadme));
 
         // get the first line
         //let shortDescriptionMatch = longDescription.match(new RegExp('^(.+)(\n|\.\s+).*$', 'm'));
@@ -50,7 +50,7 @@ class ReadmeSummarizer {
         let shortDescriptionMatch = longDescription.replace(/(\n+|(\.)\s+)/g, '$2. ').split(/\.\s/);
         let shortDescription = shortDescriptionMatch[0];
 
-        return removeEmptyLines(short ? shortDescription : longDescription);
+        return short ? shortDescription : longDescription;
     }
 }
 
@@ -78,16 +78,21 @@ function removeComments(text) {
 
 function removeEmptyLines(text) {
     // remove all the empty lines from the text
-    return text.replace(/^\s*[\r\n]/gm, '').trim('\n').trim('\r'); 
+    return text.replace(/^\s*[\r\n]/gm, '').trim('\n').trim('\r').trim(); 
 }
 
 function removeMarkdown(text) {
     // strip the text from markdown symbols, convert link and inline badges to text
-    return text.replace(/(?:__|[*#`])|\[!\[(.*?)\]\(.*?\)\]\(.*?\)|\[(.*?)\]\(.*?\)/gm, '$1'); 
+    return text.replace(/(?:__|[*#`])|\[!\[(.*?)\]\(.*?\)\]\(.*?\)|!?\[(.*?)\]\(.*?\)/gm, '$1'); 
 }
 
 function sectionizeMarkdown(text) {
     // convert all the titles and subtitles to known section title
+
+    // convert --- or === titles to regular # titles
+    text = text.replace(/^([A-Za-z\s]+)(?:-{3,}|={3,})$/gm, '# $1 \n');
+
+    // handle # titles
     return text.replace(/^#+.*$/gm, SECTION); 
 }
 
