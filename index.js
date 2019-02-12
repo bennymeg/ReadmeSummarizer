@@ -30,7 +30,7 @@ class ReadmeSummarizer {
      */
     static fromMarkdownText(text, short=true) {
         // remove badges and comments
-        let cleanReadme = removeComments(removeBadges(String(text)));
+        let cleanReadme = removeHtml(removeComments(removeBadges(String(text))));
 
         // convert titles to sections
         cleanReadme = sectionizeMarkdown(cleanReadme);
@@ -74,6 +74,11 @@ function removeBadges(text) {
 function removeComments(text) {
     // remove comments from the text
     return text.replace(/<!--.*-->/gm, ''); 
+}
+
+function removeHtml(text) {
+    // remove html markdown from the text
+    return text.replace(/<[^!][^>]*>/gm, ''); 
 }
 
 function removeEmptyLines(text) {
