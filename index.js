@@ -41,19 +41,31 @@ class ReadmeSummarizer {
         cleanReadme = cleanReadme.replace(new RegExp(`^${SECTION}(.+?)${SECTION}.*$`, 'gsm'), '$1').trim();
 
         // remove markdown from the description
-        let longDescription = removeEmptyLines(removeMarkdown(removeTables(cleanReadme)));
+        let longDescription = removeTables(cleanReadme);
 
-        // get the first line
-        //let shortDescriptionMatch = longDescription.match(new RegExp('^(.+)(\n|\.\s+).*$', 'm'));
-        //let shortDescription = shortDescriptionMatch ? shortDescriptionMatch[1] : longDescription;
-        let shortDescriptionMatch = longDescription.replace(/(\n+|(\.)\s+)/g, '$2. ').split(/\.\s/);
-        let shortDescription = shortDescriptionMatch[0];
+        // get the first descriptive line
+        let shortDescription = short ? getShortDescription(longDescription) : undefined;
 
-        return short ? shortDescription : longDescription;
+        return removeEmptyLines(removeMarkdown(short ? shortDescription : longDescription));
     }
 }
 
 const SECTION = '#SECTION';
+
+function getShortDescription(longDescription) {
+    //let shortDescriptionMatch = longDescription.match(new RegExp('^(.+)(\n|\.\s+).*$', 'm'));
+    //let shortDescription = shortDescriptionMatch ? shortDescriptionMatch[1] : longDescription;
+    let shortDescriptionMatch = longDescription.replace(/(\n+|(\.)\s+)/g, '$2. ').split(/\.\s/);
+
+    // find the first descriptive line
+    let index = shortDescriptionMatch.findIndex((line) => {
+        return !line.match(/^\s*\[!\[(.*?)\]\(.*?\)\]\(.*?\)\s*$|^\s*!?\[(.*?)\]\(.*?\)\s*$/gm);
+    });
+
+    let shortDescription = shortDescriptionMatch[index > 0 ? index : 0];
+
+    return shortDescription;
+}
 
 function fetchReadmeFile(url) {
     return dynamicFetch(url); 
@@ -61,7 +73,7 @@ function fetchReadmeFile(url) {
 
 function removeBadges(text) {
     // remove all badges which ar not part of a sentence
-    return text.replace(/^\s*\[!.*\]\(.*\)/gm, ''); 
+    return text.replace(/^\s*\[!.*\]\(.*\)|^\s*!\[(.*?)\]\(.*?\)\s*$/gm, ''); 
 }
 
 function removeComments(text) {
