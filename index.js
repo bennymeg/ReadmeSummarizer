@@ -45,10 +45,10 @@ class ReadmeSummarizer {
         let longDescription = removeMarkdown(cleanReadme);
 
         // get the first line
-        let shortDescriptionMatch = longDescription.match(new RegExp('^(.+)(\n|\.\s+).*$', 'm'));
-        let shortDescription = shortDescriptionMatch ? shortDescriptionMatch[1] : longDescription;
-        // let shortDescriptionMatch = longDescription.replace(/[\n]+/g, '. ').split(/\.\s/);
-        // let shortDescription = shortDescriptionMatch[0];
+        //let shortDescriptionMatch = longDescription.match(new RegExp('^(.+)(\n|\.\s+).*$', 'm'));
+        //let shortDescription = shortDescriptionMatch ? shortDescriptionMatch[1] : longDescription;
+        let shortDescriptionMatch = longDescription.replace(/(\n+|(\.)\s+)/g, '$2. ').split(/\.\s/);
+        let shortDescription = shortDescriptionMatch[0];
 
         return removeEmptyLines(short ? shortDescription : longDescription);
     }
