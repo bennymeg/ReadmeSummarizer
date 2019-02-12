@@ -83,7 +83,7 @@ function removeEmptyLines(text) {
 
 function removeMarkdown(text) {
     // strip the text from markdown symbols, convert link and inline badges to text
-    return text.replace(/(?:__|[*#`])|\[!\[(.*?)\]\(.*?\)\]\(.*?\)|!?\[(.*?)\]\(.*?\)/gm, '$1'); 
+    return text.replace(/(?:__|[*#`])|\[!\[(.*?)\]\(.*?\)\]\(.*?\)|!?\[(.*?)\]\(.*?\)/gm, '$1$2'); 
 }
 
 function sectionizeMarkdown(text) {
