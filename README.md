@@ -40,7 +40,7 @@ let shortSummary = false;
 ReadmeSummarizer.fromText(readmeUrl, shortSummary);
 ```
 ## Supported Environments ##
-- 💻 Browser (including browserify / webpack base environments [such as Angular])
+- 💻 Browser (including browserify / webpack based environments [such as Angular])
 - 🖥  Node.js
 
 ## Documentation ##  
