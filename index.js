@@ -1,4 +1,3 @@
-// const isMd = require('is-md');
 const dynamicFetch = require('./dynamic/node-fetch').fetch;
 
 /**
@@ -57,12 +56,6 @@ class ReadmeSummarizer {
 const SECTION = '#SECTION';
 
 function fetchReadmeFile(url) {
-    // if (!isMd(url)) {
-    //     return new Promise((resolve, reject) => {
-    //         reject("url does not directs to a markdown file");
-    //     });
-    // }
-
     return dynamicFetch(url); 
 }
 

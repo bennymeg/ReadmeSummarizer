@@ -39,6 +39,9 @@ let shortSummary = false;
 // get readme summary from text string
 ReadmeSummarizer.fromText(readmeUrl, shortSummary);
 ```
+## Supported Environments ##
+- 💻 Browser (including browserify / webpack base environments [such as Angular])
+- 🖥  Node.js
 
 ## Documentation ##  
 - 👨🏼‍💻 [API](https://github.com/bennymeg/ReadmeSummarizer/blob/master/docs/API.md),  
