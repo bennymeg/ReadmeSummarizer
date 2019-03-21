@@ -28,17 +28,17 @@ class ReadmeSummarizer {
      * @returns {Promise<string>} a promise to receive the readme summary.
      */
     static fromMarkdownText(text, short=true) {
-        // remove badges and comments
-        let cleanReadme = removeHtml(removeComments(removeBadges(String(text))));
-
         // convert titles to sections
-        cleanReadme = sectionizeMarkdown(cleanReadme);
+        let cleanReadme = sectionizeMarkdown(String(text));
 
         // add section to the end of the file
         cleanReadme = cleanReadme.concat(`\n${SECTION}`);
 
         // trim all text between the two first headlines
         cleanReadme = cleanReadme.replace(new RegExp(`^${SECTION}(.+?)${SECTION}.*$`, 'gsm'), '$1').trim();
+
+        // remove badges and comments
+        cleanReadme = removeHtml(removeComments(removeBadges(cleanReadme)));
 
         // remove markdown from the description
         let longDescription = removeTables(cleanReadme);
