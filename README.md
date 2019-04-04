@@ -3,6 +3,7 @@ Summaries markdown readme files into few sentences. Get short description for an
 
 [![licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/bennymeg/ReadmeSummarizer/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/readme-summarizer.svg)](https://www.npmjs.com/package/readme-summarizer)
+[![Dependencies status](https://david-dm.org/bennymeg/ReadmeSummarizer/status.svg)](https://david-dm.org/bennymeg/ReadmeSummarizer)
 
 
 ## Installation
